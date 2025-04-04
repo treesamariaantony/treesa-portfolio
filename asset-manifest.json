@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/treesa-portfolio/static/css/main.3663e560.css",
+    "main.js": "/treesa-portfolio/static/js/main.94eb75ea.js",
+    "static/js/488.b2915360.chunk.js": "/treesa-portfolio/static/js/488.b2915360.chunk.js",
+    "index.html": "/treesa-portfolio/index.html",
+    "main.3663e560.css.map": "/treesa-portfolio/static/css/main.3663e560.css.map",
+    "main.94eb75ea.js.map": "/treesa-portfolio/static/js/main.94eb75ea.js.map",
+    "488.b2915360.chunk.js.map": "/treesa-portfolio/static/js/488.b2915360.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3663e560.css",
+    "static/js/main.94eb75ea.js"
+  ]
+}
