@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/treesa-portfolio/static/css/main.3663e560.css",
-    "main.js": "/treesa-portfolio/static/js/main.94eb75ea.js",
-    "static/js/488.b2915360.chunk.js": "/treesa-portfolio/static/js/488.b2915360.chunk.js",
-    "index.html": "/treesa-portfolio/index.html",
-    "main.3663e560.css.map": "/treesa-portfolio/static/css/main.3663e560.css.map",
-    "main.94eb75ea.js.map": "/treesa-portfolio/static/js/main.94eb75ea.js.map",
-    "488.b2915360.chunk.js.map": "/treesa-portfolio/static/js/488.b2915360.chunk.js.map"
+    "main.css": "/static/css/main.3663e560.css",
+    "main.js": "/static/js/main.f39cd2fa.js",
+    "static/js/488.b2915360.chunk.js": "/static/js/488.b2915360.chunk.js",
+    "index.html": "/index.html",
+    "main.3663e560.css.map": "/static/css/main.3663e560.css.map",
+    "main.f39cd2fa.js.map": "/static/js/main.f39cd2fa.js.map",
+    "488.b2915360.chunk.js.map": "/static/js/488.b2915360.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3663e560.css",
-    "static/js/main.94eb75ea.js"
+    "static/js/main.f39cd2fa.js"
   ]
 }
