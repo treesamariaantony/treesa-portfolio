@@ -1,101 +1,119 @@
 import React from 'react';
-import { Container, Typography, Box, Button } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
+import { motion } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom';
 
 const Home = () => {
+  const name = "Treesa Maria Antony";
+  const title = "Software Architect & Engineer";
+
+  // Animation variants for the container of letters
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: i * 0.04 },
+    }),
+  };
+
+  // Animation variants for each letter
+  const letterVariants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+      transition: {
+        type: 'spring',
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        damping: 12,
+        stiffness: 100,
+      },
+    },
+  };
+
   return (
     <Box
       sx={{
-        minHeight: '90vh',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
-        background: 'linear-gradient(45deg, #2196f3 30%, #21cbf3 90%)',
-        color: 'white',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        width: '100%',
+        overflow: 'hidden',
+        // Creating a blueprint grid background
+        background: (theme) => `
+          linear-gradient(${theme.palette.background.default} 2px, transparent 2px),
+          linear-gradient(90deg, ${theme.palette.background.default} 2px, transparent 2px),
+          linear-gradient(rgba(25, 43, 71, 0.5) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(25, 43, 71, 0.5) 1px, transparent 1px);
+        `,
+        backgroundSize: '100px 100px, 100px 100px, 20px 20px, 20px 20px',
+        backgroundPosition: '-2px -2px, -2px -2px, -1px -1px, -1px -1px',
+        color: 'text.primary',
       }}
     >
-      <Container maxWidth="md">
-        <Box sx={{ textAlign: 'center' }}>
-          <Typography
-            variant="h1"
-            sx={{
-              mb: 4,
-              fontWeight: 700,
-              textShadow: '2px 2px 4px rgba(0,0,0,0.2)',
-            }}
-          >
-            Treesa Maria Antony
-          </Typography>
-          <Typography
-            variant="h2"
-            sx={{
-              mb: 4,
-              fontWeight: 500,
-              textShadow: '1px 1px 2px rgba(0,0,0,0.2)',
-            }}
-          >
-            Backend Engineer & AI Solutions Developer
-          </Typography>
-          <Typography
-            variant="h5"
-            sx={{
-              mb: 6,
-              maxWidth: '800px',
-              margin: '0 auto',
-              textShadow: '1px 1px 2px rgba(0,0,0,0.2)',
-            }}
-          >
-            Specializing in building robust backend systems and innovative AI solutions.
-            Let's create something amazing together.
-          </Typography>
-          <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center' }}>
-            <Button
-              component={RouterLink}
-              to="/projects"
-              variant="contained"
-              color="secondary"
-              size="large"
-              sx={{
-                fontWeight: 600,
-                px: 4,
-                py: 1.5,
-                borderRadius: 2,
-                textTransform: 'none',
-                fontSize: '1.1rem',
-                '&:hover': {
-                  transform: 'translateY(-2px)',
-                  transition: 'transform 0.2s',
-                },
-              }}
-            >
-              View My Work
-            </Button>
-            <Button
-              component={RouterLink}
-              to="/contact"
-              variant="outlined"
-              size="large"
-              sx={{
-                fontWeight: 600,
-                px: 4,
-                py: 1.5,
-                borderRadius: 2,
-                textTransform: 'none',
-                fontSize: '1.1rem',
-                color: 'white',
-                borderColor: 'white',
-                '&:hover': {
-                  borderColor: 'white',
-                  backgroundColor: 'rgba(255,255,255,0.1)',
-                  transform: 'translateY(-2px)',
-                  transition: 'transform 0.2s',
-                },
-              }}
-            >
-              Contact Me
-            </Button>
-          </Box>
-        </Box>
-      </Container>
+      <motion.div
+        style={{
+          display: 'flex',
+          overflow: 'hidden',
+          padding: '10px',
+          border: '2px solid #00bfff',
+          marginBottom: '2rem',
+          boxShadow: '0 0 15px rgba(0, 191, 255, 0.5)',
+        }}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {name.split('').map((char, index) => (
+          <motion.span key={index} variants={letterVariants} style={{ fontSize: '3rem', fontWeight: 700, color: '#00bfff' }}>
+            {char === ' ' ? '\u00A0' : char}
+          </motion.span>
+        ))}
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2.5, duration: 0.8 }}
+      >
+        <Typography variant="h5" sx={{ color: 'text.secondary', letterSpacing: '0.1em' }}>
+          {title}
+        </Typography>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 3, duration: 1 }}
+      >
+        <Button
+          component={RouterLink}
+          to="/projects"
+          variant="outlined"
+          size="large"
+          sx={{
+            marginTop: '3rem',
+            color: 'primary.main',
+            borderColor: 'primary.main',
+            borderWidth: '2px',
+            '&:hover': {
+              backgroundColor: 'rgba(0, 191, 255, 0.1)',
+              borderWidth: '2px',
+            },
+          }}
+        >
+          Load Project Schematics
+        </Button>
+      </motion.div>
     </Box>
   );
 };

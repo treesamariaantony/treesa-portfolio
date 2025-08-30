@@ -1,132 +1,101 @@
 import React from 'react';
-import {
-  Container,
-  Typography,
-  Box,
-  Paper,
-  LinearProgress,
-  Grid,
-} from '@mui/material';
+import { Box, Typography, Paper, Chip, Button, Grid } from '@mui/material';
+import { motion } from 'framer-motion';
+import FilterCenterFocusIcon from '@mui/icons-material/FilterCenterFocus';
+import ClearIcon from '@mui/icons-material/Clear';
 
-const Skills = () => {
-  const skillCategories = [
+interface SkillsProps {
+  activeSkill: string | null;
+  setActiveSkill: (skill: string | null) => void;
+}
+
+const skillCategories = [
     {
-      category: 'Backend Development',
-      skills: [
-        { name: 'Python', level: 90 },
-        { name: 'Node.js', level: 85 },
-        { name: 'Django/FastAPI', level: 88 },
-        { name: 'RESTful APIs', level: 92 },
-      ],
+      category: 'Languages & Frameworks',
+      skills: ['C#', '.NET Core', 'JavaScript', 'Java', 'Spring Boot', 'Node.js', 'Express', 'Python', 'Django', 'FastAPI', 'Quart', 'React', 'SQL', 'TypeScript', 'Vue.js'],
     },
     {
-      category: 'Database & Cloud',
-      skills: [
-        { name: 'PostgreSQL', level: 85 },
-        { name: 'MongoDB', level: 80 },
-        { name: 'AWS', level: 82 },
-        { name: 'Docker/Kubernetes', level: 78 },
-      ],
+      category: 'AI, Data, & Databases',
+      skills: ['AI-driven Workflows', 'Data Mining', 'Data Pipelines', 'Generative AI', 'LLMs', 'OpenAI', 'Prompt Engineering', 'Celery', 'Cosmos DB', 'Kafka', 'MongoDB', 'MySQL', 'PostgreSQL', 'RabbitMQ', 'Redis'],
     },
     {
-      category: 'AI & Machine Learning',
-      skills: [
-        { name: 'TensorFlow', level: 75 },
-        { name: 'OpenAI API', level: 85 },
-        { name: 'Natural Language Processing', level: 80 },
-        { name: 'Computer Vision', level: 70 },
-      ],
+      category: 'Cloud, DevOps & Tools',
+      skills: ['AWS', 'Azure', 'Azure DevOps', 'Docker', 'Git', 'GCP', 'Jenkins', 'Kubernetes', 'SonarQube', 'Terraform'],
     },
     {
-      category: 'Tools & Technologies',
-      skills: [
-        { name: 'Git/GitHub', level: 90 },
-        { name: 'CI/CD', level: 85 },
-        { name: 'System Design', level: 88 },
-        { name: 'Agile/Scrum', level: 85 },
-      ],
-    },
-  ];
+      category: 'Architecture, Security & Quality',
+      skills: ['Agile Methodologies', 'Clean Architecture', 'Event-driven Architecture', 'Microservices', 'Performance Optimization', 'RESTful APIs', 'Scalability', 'SDLC', 'JWT', 'OAuth 2.0', 'OWASP Top 10', 'RBAC', 'Secure Software Development', 'TDD', 'Pytest', 'XUnit', 'Code Review', 'End-to-End Testing', 'Integration Testing', 'Production Support'],
+    }
+];
+
+const Skills: React.FC<SkillsProps> = ({ activeSkill, setActiveSkill }) => {
+
+  const handleSkillClick = (skill: string) => {
+    // Toggle functionality: if clicking the same skill, deactivate it.
+    if (activeSkill === skill) {
+      setActiveSkill(null);
+    } else {
+      setActiveSkill(skill);
+    }
+  };
 
   return (
-    <Box sx={{ py: 8, backgroundColor: '#f5f5f5' }}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          sx={{
-            mb: 6,
-            textAlign: 'center',
-            fontWeight: 700,
-            color: 'primary.main',
-          }}
-        >
-          Skills & Expertise
-        </Typography>
+    <Box sx={{ p: { xs: 2, md: 4 }, minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+      <Typography variant="h2" gutterBottom sx={{ mb: 3, textAlign: 'center' }}>
+        Skills Workbench
+      </Typography>
+      <Typography variant="body1" sx={{ mb: 5, color: 'text.secondary', textAlign: 'center', maxWidth: '600px' }}>
+        This is an interactive workbench. Click any skill to cross-reference it with projects and experiences throughout this portfolio.
+      </Typography>
 
-        <Grid container spacing={4}>
-          {skillCategories.map((category, index) => (
-            <Grid item xs={12} md={6} key={index}>
+      {activeSkill && (
+        <Button
+          variant="outlined"
+          startIcon={<ClearIcon />}
+          onClick={() => setActiveSkill(null)}
+          sx={{ mb: 4 }}
+        >
+          Clear Filter: {activeSkill}
+        </Button>
+      )}
+
+      <Grid container spacing={4}>
+        {skillCategories.map((cat, index) => (
+          <Grid item xs={12} md={6} key={index}>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
               <Paper
-                elevation={3}
+                elevation={0}
                 sx={{
                   p: 3,
                   height: '100%',
-                  transition: 'transform 0.2s',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                  },
+                  backgroundColor: 'background.paper',
+                  border: '1px solid rgba(0, 191, 255, 0.3)',
                 }}
               >
-                <Typography
-                  variant="h5"
-                  gutterBottom
-                  sx={{
-                    fontWeight: 600,
-                    color: 'primary.main',
-                    mb: 3,
-                  }}
-                >
-                  {category.category}
-                </Typography>
-
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  {category.skills.map((skill, skillIndex) => (
-                    <Box key={skillIndex}>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          mb: 1,
-                        }}
-                      >
-                        <Typography variant="body1">{skill.name}</Typography>
-                        <Typography
-                          variant="body2"
-                          color="text.secondary"
-                        >
-                          {skill.level}%
-                        </Typography>
-                      </Box>
-                      <LinearProgress
-                        variant="determinate"
-                        value={skill.level}
-                        sx={{
-                          height: 8,
-                          borderRadius: 4,
-                          backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                          '& .MuiLinearProgress-bar': {
-                            borderRadius: 4,
-                          },
-                        }}
-                      />
-                    </Box>
+                <Typography variant="h5" sx={{ color: 'primary.main', mb: 2 }}>{cat.category}</Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                  {cat.skills.map(skill => (
+                    <Chip
+                      key={skill}
+                      label={skill}
+                      variant={activeSkill === skill ? 'filled' : 'outlined'}
+                      color="primary"
+                      onClick={() => handleSkillClick(skill)}
+                      sx={{ cursor: 'pointer' }}
+                      icon={activeSkill === skill ? <FilterCenterFocusIcon /> : undefined}
+                    />
                   ))}
                 </Box>
               </Paper>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+            </motion.div>
+          </Grid>
+        ))}
+      </Grid>
     </Box>
   );
 };

@@ -1,97 +1,83 @@
 import React from 'react';
-import { Container, Typography, Box, Paper, Grid } from '@mui/material';
-import CodeIcon from '@mui/icons-material/Code';
-import StorageIcon from '@mui/icons-material/Storage';
-import CloudIcon from '@mui/icons-material/Cloud';
+import { Box, Typography, Grid, Paper, Divider } from '@mui/material';
+import { motion } from 'framer-motion';
 
 const About = () => {
-  const skills = [
-    {
-      icon: <CodeIcon sx={{ fontSize: 40 }} />,
-      title: 'Backend Development',
-      description: 'Expertise in building scalable and maintainable backend systems using Python, Node.js, and modern frameworks.',
-    },
-    {
-      icon: <StorageIcon sx={{ fontSize: 40 }} />,
-      title: 'Database Design',
-      description: 'Proficient in designing and optimizing database schemas, working with both SQL and NoSQL databases.',
-    },
-    {
-      icon: <CloudIcon sx={{ fontSize: 40 }} />,
-      title: 'Cloud Solutions',
-      description: 'Experience with cloud platforms and deploying scalable applications using AWS and Azure services.',
-    },
+  const bio = "Highly accomplished and versatile Software Engineer with over 3 years of hands-on experience in architecting, developing, and deploying highly scalable, resilient, and secure full-stack and backend systems. I specialize in building innovative, AI-driven applications using Python (Django, FastAPI, Quart) and C#/.NET Core, with robust front-end skills in React and Vue.js. My expertise spans the entire software development lifecycle, from technical design and architectural choices to cloud-native deployments (AWS, Azure, GCP), CI/CD automation, and post-release monitoring. I am deeply committed to producing maintainable, robustly tested code and thrive on teamwork, mentoring junior developers, and knowledge sharing. Eager to leverage my passion for technology and problem-solving to contribute to cutting-edge projects and drive business success.";
+
+  const details = [
+    { label: 'STATUS', value: 'Available for new projects' },
+    { label: 'LOCATION', value: 'Paris, Île-de-France' },
+    { label: 'DISCIPLINE', value: 'Software Architect & Engineer' },
   ];
 
   return (
-    <Box sx={{ py: 8, backgroundColor: '#f5f5f5' }}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h2"
+    <Box sx={{ p: { xs: 2, md: 4 }, minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        style={{ width: '100%' }}
+      >
+        <Paper
+          elevation={0}
           sx={{
-            mb: 6,
-            textAlign: 'center',
-            fontWeight: 700,
-            color: 'primary.main',
+            p: { xs: 3, md: 5 },
+            backgroundColor: 'transparent',
+            border: '2px solid',
+            borderColor: 'primary.main',
+            boxShadow: '0 0 20px rgba(0, 191, 255, 0.3)',
           }}
         >
-          About Me
-        </Typography>
+          <Grid container spacing={5}>
+            {/* Left Column: Bio */}
+            <Grid item xs={12} md={8}>
+              <Typography variant="h2" gutterBottom sx={{ mb: 3 }}>
+                Project Brief
+              </Typography>
+              <Typography variant="body1" sx={{ color: 'text.primary', lineHeight: 1.7 }}>
+                {bio}
+              </Typography>
+            </Grid>
 
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
-            <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 }}>
-              Who I Am
-            </Typography>
-            <Typography variant="body1" paragraph>
-              I'm a passionate Backend Engineer with a strong focus on building robust
-              and scalable systems. With expertise in both traditional backend
-              development and modern cloud technologies, I strive to create efficient
-              and maintainable solutions.
-            </Typography>
-            <Typography variant="body1" paragraph>
-              My journey in software development began with a deep interest in
-              problem-solving and system design. Over the years, I've had the
-              opportunity to work on various challenging projects that have shaped my
-              expertise in backend development and cloud architecture.
-            </Typography>
-          </Grid>
-
-          <Grid item xs={12} md={6}>
-            <Typography variant="h5" gutterBottom sx={{ fontWeight: 600 }}>
-              What I Do
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-              {skills.map((skill, index) => (
-                <Paper
-                  key={index}
-                  elevation={2}
+            {/* Right Column: Details & Headshot */}
+            <Grid item xs={12} md={4}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                {/* Headshot Placeholder */}
+                <Box
                   sx={{
-                    p: 3,
+                    width: '100%',
+                    pt: '100%', // 1:1 Aspect Ratio
+                    backgroundColor: 'rgba(0, 191, 255, 0.1)',
+                    border: '2px dashed',
+                    borderColor: 'primary.main',
+                    mb: 4,
                     display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: 2,
-                    transition: 'transform 0.2s',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
-                    },
+                    alignItems: 'center',
+                    justifyContent: 'center'
                   }}
                 >
-                  <Box sx={{ color: 'primary.main' }}>{skill.icon}</Box>
-                  <Box>
-                    <Typography variant="h6" gutterBottom>
-                      {skill.title}
+                  <Typography sx={{ color: 'text.secondary' }}>HEADSHOT</Typography>
+                </Box>
+
+                <Divider sx={{ mb: 3, borderColor: 'rgba(0, 191, 255, 0.2)' }} />
+
+                {/* Details */}
+                {details.map((item, index) => (
+                  <Box key={index} sx={{ mb: 2 }}>
+                    <Typography variant="overline" sx={{ color: 'text.secondary', display: 'block' }}>
+                      {item.label}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {skill.description}
+                    <Typography variant="body2" sx={{ color: 'text.primary', fontWeight: 'bold' }}>
+                      {item.value}
                     </Typography>
                   </Box>
-                </Paper>
-              ))}
-            </Box>
+                ))}
+              </Box>
+            </Grid>
           </Grid>
-        </Grid>
-      </Container>
+        </Paper>
+      </motion.div>
     </Box>
   );
 };
